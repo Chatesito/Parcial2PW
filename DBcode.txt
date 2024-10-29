@@ -1,0 +1,64 @@
+-- Tabla User
+CREATE TABLE users (
+    usr_id SERIAL PRIMARY KEY,
+    usr_username VARCHAR(255) NOT NULL UNIQUE,
+    usr_password VARCHAR(255) NOT NULL
+);
+
+-- Tabla Role
+CREATE TABLE role (
+    rol_id SERIAL PRIMARY KEY,
+    rol_name VARCHAR(255) NOT NULL
+);
+
+-- Tabla intermedia User_Roles para la relación Many-to-Many
+CREATE TABLE user_roles (
+    usr_id BIGINT NOT NULL,
+    rol_id BIGINT NOT NULL,
+    PRIMARY KEY (usr_id, rol_id),
+    FOREIGN KEY (usr_id) REFERENCES users(usr_id) ON DELETE CASCADE,
+    FOREIGN KEY (rol_id) REFERENCES role(rol_id) ON DELETE CASCADE
+);
+
+-- Tabla profesores
+CREATE TABLE teacher (
+    tch_id SERIAL PRIMARY KEY,
+    name VARCHAR(30) NOT NULL
+);
+
+-- Tabla asignatura
+CREATE TABLE subject (
+    sub_id SERIAL PRIMARY KEY,
+    name VARCHAR(30) NOT NULL,
+    description VARCHAR(100),
+    classroom INT NOT NULL,
+    start_time TIME NOT NULL,
+    end_time TIME NOT NULL,
+    teacher_id INT,
+    FOREIGN KEY (tch_id) REFERENCES teacher(tch_id) ON DELETE SET NULL
+);
+
+
+**AÑADIR DATOS**
+
+-- añadir usuarios
+INSERT INTO users (usr_id, usr_username, usr_password)
+VALUES
+    (1, 'rector', 'contrarector'),
+    (2, 'docente', 'contradocente'),
+    (3, 'estudiante', 'contraestudiante');
+
+-- añadir roles
+INSERT INTO role (rol_id, rol_name)
+VALUES
+    (1, 'RECTOR'),
+    (2, 'DOCENTE'),
+    (3, 'ESTUDIANTE');
+
+-- añadir user_roles
+INSERT INTO user_roles (usr_id, rol_id)
+VALUES
+    (1, 1), -- rector RECTOR
+    (2, 2), -- docente DOCENTE
+    (3, 3); -- estudiante ESTUDIANTE
+
