@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title th:text="${valor} + ' Asignatura'">Modificar Asignatura</title>
+</head>
+<body>
+<h1 th:text="${valor} + ' Asignatura'"></h1>
+
+<form th:action="@{/subject/insert}" th:object="${newSub}" method="post">
+  <input type="hidden" th:field="*{id}" />
+
+  <label>Nombre:</label>
+  <input type="text" th:field="*{name}" required/>
+
+  <label>Descripción:</label>
+  <input type="text" th:field="*{description}" required/>
+
+  <label>Salón:</label>
+  <input type="number" th:field="*{classroom}" required/>
+
+  <label>Horario Inicio:</label>
+  <input type="time" th:field="*{startTime}" required/>
+
+  <label>Horario Fin:</label>
+  <input type="time" th:field="*{endTime}" required/>
+
+  <label>Docente:</label>
+  <select th:field="*{teacher.id}" required>
+    <option th:each="teacher : ${teachers}"
+            th:value="${teacher.id}"
+            th:text="${teacher.username}"></option>
+  </select>
+
+  <button type="submit" th:text="${valor}"></button>
+</form>
+
+<a href="@{/subject/list}">Volver a la Lista de Asignaturas</a>
+</body>
+</html>

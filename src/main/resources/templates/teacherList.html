@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Lista de Asignaturas</title>
+</head>
+<body>
+<h1>Lista de Asignaturas</h1>
+
+<table>
+  <thead>
+  <tr>
+    <th>Nombre</th>
+    <th>Descripción</th>
+    <th>Salón</th>
+    <th>Horario</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="subject : ${subjects}">
+    <td th:text="${subject.name}"></td>
+    <td th:text="${subject.description}"></td>
+    <td th:text="${subject.classroom}"></td>
+    <td th:text="${subject.startTime} + ' - ' + ${subject.endTime}"></td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>

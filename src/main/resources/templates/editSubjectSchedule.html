@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Editar Horario de Asignatura</title>
+</head>
+<body>
+<h1>Editar Horario de Asignatura</h1>
+
+<form th:action="@{/teacher/subject/updateSchedule}" th:object="${subject}" method="post">
+    <input type="hidden" th:field="*{id}" />
+
+    <label>Nombre:</label>
+    <input type="text" th:field="*{name}" disabled/>
+
+    <label>Horario Inicio:</label>
+    <input type="time" th:field="*{startTime}" required/>
+
+    <label>Horario Fin:</label>
+    <input type="time" th:field="*{endTime}" required/>
+
+    <button type="submit">Actualizar Horario</button>
+</form>
+
+<a href="@{/teacher/subjects}">Volver a Mis Asignaturas</a>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Lista de Asignaturas</title>
+</head>
+<body>
+<h1>Lista de Asignaturas</h1>
+
+<table>
+  <thead>
+  <tr>
+    <th>Nombre</th>
+    <th>Descripción</th>
+    <th>Salón</th>
+    <th>Horario</th>
+    <th>Docente</th>
+    <th>Acciones</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="subject : ${subjects}">
+    <td th:text="${subject.name}"></td>
+    <td th:text="${subject.description}"></td>
+    <td th:text="${subject.classroom}"></td>
+    <td th:text="${subject.startTime} + ' - ' + ${subject.endTime}"></td>
+    <td th:text="${subject.teacher.username}"></td>
+    <td>
+      <a th:href="@{/subject/modify/{id}(id=${subject.id})}">Modificar</a>
+      <a th:href="@{/subject/delete/{id}(id=${subject.id})}">Eliminar</a>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<a href="@{/subject/add}">Añadir Nueva Asignatura</a>
+</body>
+</html>
